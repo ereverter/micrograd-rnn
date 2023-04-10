@@ -5,8 +5,8 @@ from nn import Module
 class RNNNeuron(Module):
 
     def __init__(self, nin, nonlin=True):
-        self.w_xh = [Value(random.uniform(-1, 1)) for _ in range(nin)]
-        self.w_hh = [Value(random.uniform(-1, 1)) for _ in range(nin)]
+        self.w_xh = [Value(random.uniform(-0.1, 0.1)) for _ in range(nin)]
+        self.w_hh = [Value(random.uniform(-0.1, 0.1)) for _ in range(nin)]
         self.b = Value(0)
         self.h = Value(0)
         self.nonlin = nonlin
@@ -52,7 +52,6 @@ class RNN(Module):
     def __call__(self, x, h_prevs):
         h_new_all = []
         for layer_idx, layer in enumerate(self.layers):
-            print('layer_idx', layer_idx)
             h_prev = h_prevs[layer_idx]
             x, h_new = layer(x, h_prev)
             h_new_all.append(h_new)
